@@ -8,19 +8,21 @@ stages:
 
 - stage: QA
   dependsOn: Dev
+  condition: succeeded('Dev')
   jobs:
   - job: Q1
     steps:
     - bash: echo "This is QA"
-    condition: succeeded('Dev')
+    
 
 - stage: Prod
   dependsOn: QA
+  condition: succeeded('QA')
   jobs:
   - job: P1
     steps:
     - bash: echo "This is Production"
-    condition: succeeded('QA')
+    
 
 - stage: Test
   jobs:
