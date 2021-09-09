@@ -24,14 +24,14 @@ stages:
     steps:
     - bash: echo "This is Test"
 
-- stage: DeployUS1
+- stage: DeployUSA
   jobs:
   - job: DeployUS1
     steps:
     - bash: echo "This is DeployUS1"
   dependsOn: Test    # this stage runs after Test
 
-- stage: DeployUS2
+- stage: DeployUSB
   jobs:
   - job: DeployUS2
     steps:
@@ -43,7 +43,7 @@ stages:
   - job: Europe
     steps:
     - bash: echo "This is Europe"
-    dependsOn: DeployUS1
+    dependsOn: DeployUSA
 
   - job: Sweden
     steps:
