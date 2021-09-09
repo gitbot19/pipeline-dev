@@ -1,10 +1,32 @@
 stages:
-- stage: A
+- stage: Dev
   jobs:
-  - job: A1
-  - job: A2
+  - job: D1
+  - job: D2
+    steps:
+    - bash: echo "This is Dev D2"
 
-- stage: B
+- stage: QA
   jobs:
-  - job: B1
-  - job: B2
+  - job: Q1
+    steps:
+      - bash: echo "This is QA"
+
+- stage: Prod
+  jobs:
+  - job: P1
+    steps:
+    - bash: echo "This is Production"
+
+- stage: Test
+
+- stage: DeployUS1
+  dependsOn: Test    # this stage runs after Test
+
+- stage: DeployUS2
+  dependsOn: Test    # this stage runs in parallel with DeployUS1, after Test
+
+- stage: DeployEurope
+  dependsOn:         # this stage runs after DeployUS1 and DeployUS2
+  - DeployUS1
+  - DeployUS2
