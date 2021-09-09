@@ -39,7 +39,9 @@ stages:
   dependsOn: Test    # this stage runs in parallel with DeployUS1, after Test
 
 - stage: DeployEurope
-  dependsOn: DeployUSA
+  dependsOn: 
+  - DeployUSA
+  - DeployUSB
   jobs:
   - job: Europe
     steps:
