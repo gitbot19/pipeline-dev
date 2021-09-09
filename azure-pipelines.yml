@@ -19,6 +19,10 @@ stages:
     - bash: echo "This is Production"
 
 - stage: Test
+  jobs:
+  - job: T1
+    steps:
+    - bash: echo "This is Test"
 
 - stage: DeployUS1
   dependsOn: Test    # this stage runs after Test
