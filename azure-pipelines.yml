@@ -6,6 +6,20 @@ stages:
     steps:
     - bash: echo "This is Dev"
 
+- stage: Devx
+  jobs:
+  - job: D3
+    steps:
+    - bash: echo "This is Devx" | exit 1
+
+- stage: UAT
+  dependsOn: Devx
+  condition: failed()
+  jobs:
+  - job: UAT
+    steps:
+    - bash: echo "This job only runs when Devx fails"
+
 - stage: QA
   dependsOn: Dev
   condition: succeeded('Dev')
