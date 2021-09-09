@@ -18,14 +18,11 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-# if you do not use a dependsOn keyword, stages run in the order they are defined
-stages:
-- stage: QA
-  jobs:
-  - job:
-    - script: echo Job QA
+jobs:
+- job: A
+  steps:
+  - bash: echo "A"
 
-- stage: Prod
-  jobs:
-  - job:
-    - script: echo Job Prod
+- job: B
+  steps:
+  - bash: echo "B"
