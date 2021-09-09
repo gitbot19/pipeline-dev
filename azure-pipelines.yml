@@ -1,15 +1,10 @@
-# this has one implicit stage and one implicit job
-pool:
-  vmImage: 'ubuntu-latest'
-steps:
-- bash: echo "Hello world"
-
-# this pipeline has one implicit stage
+stages:
+- stage: A
   jobs:
-  - job: A
-    steps:
-  - bash: echo "A"
+  - job: A1
+  - job: A2
 
-  - job: B
-    steps:
-    - bash: echo "B"
+- stage: B
+  jobs:
+  - job: B1
+  - job: B2
