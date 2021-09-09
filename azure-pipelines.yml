@@ -43,9 +43,6 @@ stages:
   - job: Europe
     steps:
     - bash: echo "This is Europe"
-    dependsOn:         # this stage runs after DeployUS1 and DeployUS2
-      - DeployUS1
-      - DeployUS2
   - job: Sweden
     steps:
     - bash: echo "This is Sweden"
