@@ -39,12 +39,11 @@ stages:
   dependsOn: Test    # this stage runs in parallel with DeployUS1, after Test
 
 - stage: DeployEurope
+  dependsOn: DeployUSA
   jobs:
   - job: Europe
     steps:
     - bash: echo "This is Europe"
-    dependsOn: DeployUSA
-
   - job: Sweden
     steps:
     - bash: echo "This is Sweden"
