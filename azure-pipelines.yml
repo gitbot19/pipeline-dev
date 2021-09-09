@@ -26,14 +26,14 @@ stages:
 
 - stage: DeployUS1
   jobs:
-  - job: US1
+  - job: DeployUS1
     steps:
     - bash: echo "This is DeployUS1"
   dependsOn: Test    # this stage runs after Test
 
 - stage: DeployUS2
   jobs:
-  - job: US2
+  - job: DeployUS2
     steps:
     - bash: echo "This is US2"
   dependsOn: Test    # this stage runs in parallel with DeployUS1, after Test
