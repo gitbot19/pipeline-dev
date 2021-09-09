@@ -4,9 +4,10 @@ stages:
   - job: D1
   - job: D2
     steps:
-    - bash: echo "This is Dev D2"
+    - bash: echo "This is Dev"
 
 - stage: QA
+  dependsOn: Dev
   jobs:
   - job: Q1
     steps:
@@ -14,6 +15,7 @@ stages:
     condition: succeeded('Dev')
 
 - stage: Prod
+  dependsOn: QA
   jobs:
   - job: P1
     steps:
