@@ -48,4 +48,4 @@ stages:
   - job: Sweden
     steps:
     - bash: echo "This is Sweden"
-    dependsOn: DeployUS2
+    dependsOn: Europe
