@@ -1,3 +1,9 @@
+# specific branch build
+trigger:
+  branches:
+    include:
+    - master
+    - releases/*
 stages:
 - stage: Dev
   jobs:
