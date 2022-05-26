@@ -1,0 +1,77 @@
+# specific branch build add test
+trigger:
+  branches:
+    include:
+    - master
+    - releases/*
+stages:
+- stage: Dev
+  jobs:
+  - job: D1
+  - job: D2
+    steps:
+    - bash: echo "This is Dev"
+
+- stage: Devx
+  jobs:
+  - job: D3
+    steps:
+    - bash: echo "This is Devx" | exit 1
+
+- stage: UAT
+  dependsOn: Devx
+  condition: failed()
+  jobs:
+  - job: UAT
+    steps:
+    - bash: echo "This job only runs when Devx fails"
+
+- stage: QA
+  dependsOn: Dev
+  condition: succeeded('Dev')
+  jobs:
+  - job: Q1
+    steps:
+    - bash: echo "This is QA"
+    
+
+- stage: Prod
+  dependsOn: QA
+  condition: succeeded('QA')
+  jobs:
+  - job: P1
+    steps:
+    - bash: echo "This is Production"
+    
+
+- stage: Test
+  jobs:
+  - job: T1
+    steps:
+    - bash: echo "This is Test"
+
+- stage: DeployUSA
+  jobs:
+  - job: DeployUS1
+    steps:
+    - bash: echo "This is DeployUS1"
+  dependsOn: Test    # this stage runs after Test
+
+- stage: DeployUSB
+  jobs:
+  - job: DeployUS2
+    steps:
+    - bash: echo "This is US2"
+  dependsOn: Test    # this stage runs in parallel with DeployUS1, after Test
+
+- stage: DeployEurope
+  dependsOn: 
+  - DeployUSA
+  - DeployUSB
+  jobs:
+  - job: Europe
+    steps:
+    - bash: echo "This is Europe"
+  - job: Sweden
+    steps:
+    - bash: echo "This is Sweden"
